@@ -56,12 +56,19 @@ labels = model.labels_
 print(labels)
 
 # using labels find population around centroid
-count = 0
-for i in range(len(labels)):
-    if (labels[i] == 1):
-        count = count+1
+c = 0
+for i in labels:
+    if i==1:
+        c+=1
+print("Population of cluster around m2 is "+str(c))
 
-print('No of population around cluster 2:', count-1)
+#For p6
+p6 =[0.25,0.5]
+y_pred = model.predict([p6])
+if y_pred==0:
+    print("P6 belongs to m1 cluster")
+else:
+    print("P6 belongs to m2 cluster")
 
 # Find new centroids
 new_centroids = model.cluster_centers_
