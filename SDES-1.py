@@ -9,7 +9,7 @@ def per10(k):
     key = list(k)
     s=" "
     print(s.join(key))
-
+    #3 5 2 7 4 10 1 9 8 6
     p = list()
     p.insert(0, key[8])
     p.insert(1, key[3])
@@ -45,7 +45,7 @@ def per8(key):
     print("Before 8 bit Permutation")
     s = " "
     print(s.join(key))
-
+    #6 3 7 4 8 5 10 9
     p = list()
     p.insert(0, key[8])
     p.insert(1, key[2])
