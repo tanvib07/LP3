@@ -1,57 +1,44 @@
-# We will need 3 funtions to
-# Permute 10 bits
-# Permute 8 bits
-# Shift bits
-# to get K1,K2 from 2 rounds
+# Plain text is permuted
+# then perform expansion and permutation on right half
+# K1 xor with new key
+# K2 xor with new key
 
-def per(k, per):
-    print("Before Permutation")
-    key = list(k)
+def per(text,per):
+    t = list(text)
     s=" "
-    print(s.join(key))
+    print("------------------------------")
+    p = list()
 
-    p =[]
     for i in per:
-        p.append(key[i-1])
+        p.append(t[i - 1])
 
     print("After Permutation")
-    s=" "
     print(s.join(p))
     print(" ")
     print("------------------------------")
     return p
 
-def rotate(l,n):
-    return l[n:]+l[:n]
 
-def leftshift(key,num):
-    l_key, r_key = rotate(key[0:5],num), rotate(key[5:],num)
-    final_key = l_key+r_key
+if __name__ == "__main__":
+    print("Enter K1 key")
+    k1 = list(map(int,input()))
+    print("Enter K2 key")
+    k2 = list(map(int,input()))
+    print("Enter plain text")
+    text = input()
+    p8 = [2,6,3,1,4,8,5,7]
+    exp=[4,1,2,3,2,3,4,1]
+
+    p_text = per(text, p8)
+    t = p_text[4:]
+    output = per(t, exp)
+    output = [int(i) for i in output]
     s=" "
-    print("After Left Shift for Round "+str(num))
-    print(s.join(final_key))
+    #XOR with k1
+    result1 = list(map(str, (a ^ b for a, b in zip(k1, output))))
+    print("XOR with K1 : "+str(s.join(result1)))
     print(" ")
     print("------------------------------")
-    return final_key
-
-
-
-if __name__ == "__main__" :
-    p8 = [6,3,7,4,8,5,10,9]
-    p10= [3,5,2,7,4,10,1,9,8,6]
-    print("Enter 10 bit key")
-    k = input()
-    #Round1 for K1
-    p_key = per(k,p10) #10 bit permutation
-    num=1
-    s_key = leftshift(p_key,num) #shift by 1 and get the key
-    K1 = per(s_key, p8) #8bit permutation
-    num=2
-    s1_key = leftshift(s_key,num) #shift by 2
-    K2 = per(s1_key,p8) #8bit permutation
-    s=" "
-    print("K1 = "+str(s.join(K1)) +" and K2 = "+str(s.join(K2)))
-
-
-
-
+    # XOR with k2
+    result2 = list(map(str, (a ^ b for a, b in zip(k2, output))))
+    print("XOR with K2 : "+ str(s.join(result2)))
