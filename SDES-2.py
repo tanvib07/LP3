@@ -6,6 +6,7 @@
 def per8(text):
     t = list(text)
     s=" "
+    #6 3 7 4 8 5 10 9
     print("------------------------------")
     p = list()
     p.insert(0, t[7])
@@ -26,6 +27,7 @@ def split_exp_per(p_text):
     t = p_text[4:]
     p = list()
     s=" "
+    #4 1 2 3 2 3 4 1
     print("Right half is "+str(s.join(t)))
     p.insert(0, t[1])
     p.insert(1, t[2])
